@@ -21,4 +21,9 @@ jobs:
             if [ ! -d Vault2025 ]; then git clone https://github.com/AK478-dev/Vault2025.git; fi
             cd Vault2025
             git pull origin main
-            pip install -r requirements.txt
+            apt-get update
+            apt-get install -y python3-pip
+            pip3 install -r requirements.txtname: Auto Deploy
+
+
+    

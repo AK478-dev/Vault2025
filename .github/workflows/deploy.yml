@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Deploy to DigitalOcean Droplet
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -18,12 +23,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /root
-            if [ ! -d Vault2025 ]; then git clone https://github.com/AK478-dev/Vault2025.git; fi
+            if [ ! -d Vault2025 ]; then
+              git clone https://github.com/AK478-dev/Vault2025.git
+            fi
             cd Vault2025
             git pull origin main
             apt-get update
             apt-get install -y python3-pip
-            pip3 install -r requirements.txtname: Auto Deploy
-
-
-    
+            pip3 install --break-system-packages -r requirements.txt
